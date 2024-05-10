@@ -19,7 +19,38 @@ class Matrix{
             }
         }
 
-        friend istream& operator>>(istream &in,Matrix &m);
-        friend ostream& operator>>(ostream &out,Matrix &m);
+        template<class U>
+        friend istream& operator>>(istream &in,Matrix<U> &m);
+    
+        template<class U>
+        friend ostream& operator<<(ostream &out,const Matrix<U> &m);
+
+        ~Matrix() {
+            for(int i = 0; i < rows; i++) {
+                delete[] m[i];
+            }
+            delete[] m;
+        }
 };
 
+template<class T>
+istream& operator>>(istream& in, Matrix<T>& mat) {
+    for (int i = 0; i < mat.rows; i++) {
+        for (int j = 0; j < mat.columns; j++) {
+            cout << "Enter element at position [" << i << "][" << j << "]: ";
+            in >> mat.m[i][j];
+        }
+    }
+    return in;
+}
+
+template<class T>
+ostream& operator<<(ostream& out, const Matrix<T>& mat) {
+    for (int i = 0; i < mat.rows; i++) {
+        for (int j = 0; j < mat.columns; j++) {
+            out << mat.m[i][j] << " ";
+        }
+        out << endl;
+    }
+    return out;
+}
