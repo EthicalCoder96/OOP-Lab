@@ -13,7 +13,7 @@ class Array{
             this->size = size;
             arr = new T[size];
         }
-
+//setting array
         void setArray(){
             for(int i=0;i<size;i++){
                 cout<<"Enter element : ";
